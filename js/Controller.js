@@ -25,7 +25,15 @@ function HomeCtrl($scope, $rootScope, Question)
 
 	$scope.getHint = function()
 	{
+		//$scope.question.hint ใช้
+		$scope.showHint = "คำใบ้คืออะไร";
+	}
 
+	$scope.isShowHint = function()
+	{
+
+		//return show;
+		return "hide";
 	}
 
 }

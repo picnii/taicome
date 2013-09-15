@@ -5,10 +5,18 @@
 			<span class="syllable">{{question.syllable}} พยางค์</span>
 		</header>
 		<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
+		<div class="{{isShowHint()}}">
+			{{showHint}}
+		</div>
 	</div>
 	<form ng-submit="checkAnswer()">
-		<input type="text" ng-model="answer">
-		<input type="submit" class="btn btn-primary" value="ตอบ">
-		<input type="button" class="btn btn-danger" value="ใบ้หน่อย" ng-click="getHint()">
+		<div class="answer-bar">
+			<input type="text" ng-model="answer" placeholder="ข้อนี้ {{question.syllable}} พยางค์ ลองพิมพ์แล้วenterเลย">
+		</div>
+		<div class="answer-option">
+			<input type="submit" class="btn btn-primary" value="ตอบ">
+			<input type="button" class="btn btn-danger" value="ใบ้หน่อย" ng-click="getHint()">
+			<input type="button" class="btn btn-reverse" value="เล่นด่านแรกใหม่" ng-click="replay()" />
+		</div>
 	</form>
 </section>
