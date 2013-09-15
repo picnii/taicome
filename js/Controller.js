@@ -17,7 +17,8 @@ function HomeCtrl($scope, $rootScope, Question)
 	$scope.getNewQuestion = function()
 	{
 		$scope.level++;
-		console.log($scope.level)
+		console.log($scope.level);
+		$scope.question = Question.get({level:$scope.level});
 	}
 
 	$scope.getHint = function()
