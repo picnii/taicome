@@ -1,6 +1,7 @@
 function HomeCtrl($scope, $rootScope, Question)
 {
 	$scope.level = loadCurrentLevel();
+	$scope.shouldShowHint = false;
 	$scope.question = Question.get({level:$scope.level},function(){
 
 
@@ -30,19 +31,22 @@ function HomeCtrl($scope, $rootScope, Question)
 
 			adjustImages();
 		});
+		$scope.shouldShowHint = false;
 	}
 
 	$scope.getHint = function()
 	{
 		//$scope.question.hint ใช้
-		$scope.showHint = "คำใบ้คืออะไร";
+		$scope.showHint = $scope.question.hint;
+		$scope.shouldShowHint = true;
 	}
 
 	$scope.isShowHint = function()
 	{
-
-		//return show;
-		return "hide";
+		if($scope.shouldShowHint)
+			return "show";
+		else
+			return "hide";
 	}
 
 }
