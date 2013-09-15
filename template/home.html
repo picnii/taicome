@@ -1,0 +1,8 @@
+<section ng-controller="HomeCtrl" class="controller">
+	<div>
+		<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
+	</div>
+	<input type="text" ng-model="answer">
+	<input type="button" ng-click="checkAnswer()" value="submit">
+	Hello
+</section>
