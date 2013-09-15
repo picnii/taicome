@@ -1,4 +1,4 @@
-function HomeCtrl($scope, $rootScope, Question)
+function HomeCtrl($scope, $rootScope, Question, $location)
 {
 	$scope.level = loadCurrentLevel();
 	$scope.shouldShowHint = false;
@@ -57,4 +57,17 @@ function HomeCtrl($scope, $rootScope, Question)
 		$scope.getNewQuestion();
 	}
 
+	$scope.test = function()
+	{
+		$rootScope.test = "yes";
+		$location.path('/win');
+	}
+
+}
+
+function WinCtrl($scope, $rootScope, $location)
+{
+	$scope.test = $rootScope.test;
+	
+	$location.path('/');
 }
