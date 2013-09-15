@@ -1,7 +1,12 @@
 function HomeCtrl($scope, $rootScope, Question)
 {
 	$scope.level = loadCurrentLevel();
-	$scope.question = Question.get({level:$scope.level});
+	$scope.question = Question.get({level:$scope.level},function(){
+
+
+		adjustImages();
+	});
+
 
 	$scope.checkAnswer = function()
 	{
@@ -20,7 +25,11 @@ function HomeCtrl($scope, $rootScope, Question)
 		$scope.level++;
 		saveLevel($scope.level);
 		console.log($scope.level);
-		$scope.question = Question.get({level:$scope.level});
+		$scope.question = Question.get({level:$scope.level},function(){
+
+
+			adjustImages();
+		});
 	}
 
 	$scope.getHint = function()

@@ -27,4 +27,18 @@ function adjustImages()
 	//$($('.guess.image img')[0]).height(150) adjust
 	//$($('.guess.image img')[0]).height() get height
 	//$('.guess.image img') array of pictures
+	var runNumber = 0;
+	var baseHeight = 2000000;
+	while(runNumber<$('.guess.image img').length)
+	{
+		var pictureHeight = $($('.guess.image img')[runNumber]).height();
+		if(pictureHeight< baseHeight)
+		{
+			baseHeight = pictureHeight;
+		}
+		runNumber++;
+	}
+	$($('.guess.image img')[0]).height(baseHeight);
+	$($('.guess.image img')[1]).height(baseHeight);
+	$($('.guess.image img')[2]).height(baseHeight);
 }
