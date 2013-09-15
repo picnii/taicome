@@ -39,10 +39,12 @@ function adjustImages()
 			}
 			runNumber++;
 		}
-		$($('.guess.image img')[0]).height(baseHeight);
-		$($('.guess.image img')[1]).height(baseHeight);
-		$($('.guess.image img')[2]).height(baseHeight);
-
+		var runNumber_2 = 0;
+		while(runNumber_2<('.guess.image img').length)
+		{
+		$($('.guess.image img')[runNumber_2]).height(baseHeight);
+		runNumber_2++;
+		}
 	}, 100);
 	
 }

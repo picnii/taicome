@@ -2,9 +2,13 @@ function HomeCtrl($scope, $rootScope, Question, $location)
 {
 	$scope.level = loadCurrentLevel();
 	$scope.shouldShowHint = false;
-	$scope.question = Question.get({level:$scope.level},function(){
-
-
+	$scope.question = Question.get({level:$scope.level},function(data){
+		console.log(data);
+		console.log($scope.question);
+		if($scope.question.status == "win")
+		{
+			$location.path('/win');
+		}
 		adjustImages();
 	});
 	$scope.showHint = "ไม่มีคำใบ้จ้า";
@@ -17,8 +21,12 @@ function HomeCtrl($scope, $rootScope, Question, $location)
 		if($scope.question.answer == $scope.answer)
 		{
 			$scope.getNewQuestion();
+			$scope.answer = "";
+		}else
+		{
+			shakeAnswerBar();
 		}
-		$scope.answer = ""
+		
 	}
 
 	$scope.getNewQuestion = function()
@@ -27,12 +35,17 @@ function HomeCtrl($scope, $rootScope, Question, $location)
 		saveLevel($scope.level);
 		console.log($scope.level);
 		$scope.question = Question.get({level:$scope.level},function(){
-
+			if($scope.question.status == "win")
+					{
+						$location.path('/win');
+					}
 
 			adjustImages();
 		});
 		$scope.shouldShowHint = false;
 		doChangeQuestionAnimation(350);
+
+		
 	}
 
 	$scope.getHint = function()
@@ -68,6 +81,6 @@ function HomeCtrl($scope, $rootScope, Question, $location)
 function WinCtrl($scope, $rootScope, $location)
 {
 	$scope.test = $rootScope.test;
-	
-	$location.path('/');
+	//$location.path('/');
+	adjustImages();
 }
