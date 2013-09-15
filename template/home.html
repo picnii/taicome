@@ -1,8 +1,14 @@
-<section ng-controller="HomeCtrl" class="controller">
-	<div>
+<section ng-controller="HomeCtrl" class="container">
+	<h1>ทายคำ Level {{question.level}}</h1>
+	<div class="guess image">
+		<header>
+			<span class="syllable">{{question.syllable}} พยางค์</span>
+		</header>
 		<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
 	</div>
-	<input type="text" ng-model="answer">
-	<input type="button" ng-click="checkAnswer()" value="submit">
-	Hello
+	<form ng-submit="checkAnswer()">
+		<input type="text" ng-model="answer">
+		<input type="submit" class="btn btn-primary" value="ตอบ">
+		<input type="button" class="btn btn-danger" value="ใบ้หน่อย" ng-click="getHint()">
+	</form>
 </section>
