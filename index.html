@@ -94,16 +94,26 @@
         {
             color:white;
         }
+        .imageContainer {
+            text-align: center;
+        }
+
 
         .guess.image 
         {
             background-color: #333;
             text-align: center;
             position: relative;;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            padding:5px;
+            border-radius: 5px;
         }
 
         footer.footer {
             text-align: center;
+            margin-top: -20px;
         }
 
         #coverall
@@ -115,13 +125,33 @@
             z-index:99999999;
             display: none;
         }
+        html, body, #bodyWrapper { height: 100%; }
+        body > #bodyWrapper {
+            height: auto; min-height: 100%;
+
+        }
+        
     </style>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=551880718216871";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <div id="coverall"></div>
-	<div ng-view></div>
+    <div id="bodyWrapper">
+	   <div ng-view></div>
+        <div class="social">
+            <div class="fb-like" data-href="http://picnii.me/taicome" data-width="450" data-layout="box_count" data-show-faces="true" data-send="false"></div>
+        </div>
+    </div>
+
     <footer class="footer">
-        Dev by <a href="http://picnii.me">Picnii.me</a> 
+        ภาพทั้งหมดนำมาจาก Google Search พัฒนาโดย <a href="http://picnii.me">Picnii และ นักเรียน</a> 
     </footer>
 </body>
 

@@ -49,7 +49,7 @@ function adjustImages()
 
 function shakeAnswerBar()
 {
-
+	$('.answer-bar input').animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75).animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75).animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75).animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75)
 }
 
 function doChangeQuestionAnimation(millisec)

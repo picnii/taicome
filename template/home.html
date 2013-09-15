@@ -1,11 +1,11 @@
 <section ng-controller="HomeCtrl" class="container">
-	<h1>ทายคำ Level {{question.level}}</h1>
-	<div class="guess image">
-		<header>
-			<span class="syllable">{{question.syllable}} พยางค์</span>
-		</header>
-		<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
-		
+	<header style="text-align:center;">
+		<h1>ทายคำ Level {{question.level}}</h1>
+	</header>
+	<div class="imageContainer">
+		<div class="guess image">
+			<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
+		</div>
 	</div>
 	<div class="{{isShowHint()}} hint">
 			{{showHint}}
@@ -20,5 +20,4 @@
 			<input type="button" class="btn btn-reverse" value="เล่นด่านแรกใหม่" ng-click="replay()" />
 		</div>
 	</form>
-	<button ng-click="test()">Test</button>
 </section>
