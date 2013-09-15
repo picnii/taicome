@@ -21,3 +21,10 @@ function saveLevel(level)
 {
 	localStorage.lastplayedlevel = level;
 }
+
+function adjustImages()
+{
+	//$($('.guess.image img')[0]).height(150) adjust
+	//$($('.guess.image img')[0]).height() get height
+	//$('.guess.image img') array of pictures
+}
