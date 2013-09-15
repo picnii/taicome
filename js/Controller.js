@@ -12,11 +12,13 @@ function HomeCtrl($scope, $rootScope, Question)
 		{
 			$scope.getNewQuestion();
 		}
+		$scope.answer = ""
 	}
 
 	$scope.getNewQuestion = function()
 	{
 		$scope.level++;
+		saveLevel($scope.level);
 		console.log($scope.level);
 		$scope.question = Question.get({level:$scope.level});
 	}
