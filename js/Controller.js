@@ -45,13 +45,19 @@ function HomeCtrl($scope, $rootScope, Question, $location)
 		$scope.shouldShowHint = false;
 		doChangeQuestionAnimation(350);
 
-		
+		$rootScope.countlevel == $scope.level;
 	}
 
 	$scope.getHint = function()
 	{
 		//$scope.question.hint ใช้
-		$scope.showHint = $scope.question.hint;
+		if($scope.question.hint != null)
+		{
+			$scope.showHint = $scope.question.hint;
+		}else
+		{
+			$scope.showHint =  "ไม่มีคำใบ้จ้า";
+		}
 		$scope.shouldShowHint = true;
 	}
 
@@ -83,4 +89,11 @@ function WinCtrl($scope, $rootScope, $location)
 	$scope.test = $rootScope.test;
 	//$location.path('/');
 	adjustImages();
+	
+	$scope.replay = function()
+	{
+		localStorage.lastplayedlevel = 0;
+		$scope.level = loadCurrentLevel();
+		$scope.getNewQuestion();
+	}
 }
