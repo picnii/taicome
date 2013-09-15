@@ -32,6 +32,7 @@ function HomeCtrl($scope, $rootScope, Question)
 			adjustImages();
 		});
 		$scope.shouldShowHint = false;
+		doChangeQuestionAnimation(350);
 	}
 
 	$scope.getHint = function()
@@ -47,6 +48,13 @@ function HomeCtrl($scope, $rootScope, Question)
 			return "show";
 		else
 			return "hide";
+	}
+
+	$scope.replay = function()
+	{
+		localStorage.lastplayedlevel = 0;
+		$scope.level = loadCurrentLevel();
+		$scope.getNewQuestion();
 	}
 
 }
