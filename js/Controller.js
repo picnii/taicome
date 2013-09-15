@@ -8,7 +8,7 @@ function HomeCtrl($scope, $rootScope, Question)
 
 	$scope.checkAnswer = function()
 	{
-		console.log($scope.question.answer)
+
 	}
 
 	$scope.getNewQuestion = function()
