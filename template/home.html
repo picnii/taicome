@@ -5,10 +5,11 @@
 			<span class="syllable">{{question.syllable}} พยางค์</span>
 		</header>
 		<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
-		<div class="{{isShowHint()}}">
+		
+	</div>
+	<div class="{{isShowHint()}} hint">
 			{{showHint}}
 		</div>
-	</div>
 	<form ng-submit="checkAnswer()">
 		<div class="answer-bar">
 			<input type="text" ng-model="answer" placeholder="ข้อนี้ {{question.syllable}} พยางค์ ลองพิมพ์แล้วenterเลย">

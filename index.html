@@ -39,6 +39,16 @@
     		display: none;
     	}
 
+        .hint
+        {
+           margin-top: 10px;
+            border-radius: 5px;
+            background-color: rgba(50,50,50,0.5);
+            color:white;
+            text-align: center;
+            padding:5px;
+        }
+
         .answer-bar
         {
             margin-top:20px;
@@ -89,14 +99,26 @@
         {
             background-color: #333;
             text-align: center;
+            position: relative;;
         }
 
         footer.footer {
             text-align: center;
         }
+
+        #coverall
+        {
+            position: absolute;
+            background-color: black;
+            height: 100%;
+            width: 100%;
+            z-index:99999999;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div id="coverall"></div>
 	<div ng-view></div>
     <footer class="footer">
         Dev by <a href="http://picnii.me">Picnii.me</a> 

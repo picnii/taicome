@@ -6,7 +6,7 @@ function HomeCtrl($scope, $rootScope, Question)
 
 		adjustImages();
 	});
-
+	$scope.showHint = "ไม่มีคำใบ้จ้า";
 
 	$scope.checkAnswer = function()
 	{
@@ -40,9 +40,9 @@ function HomeCtrl($scope, $rootScope, Question)
 
 	$scope.isShowHint = function()
 	{
-
-		//return show;
-		return "hide";
+		//if(???)
+		return "show";
+		//return "hide";
 	}
 
 }
