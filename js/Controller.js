@@ -275,7 +275,7 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 			if($scope.answer == $scope.question.answer)
 			{
 				$scope.answer = "";	
-				$location.path('/random');
+				$scope.random();
 				resetColor();
 			}else
 				shakeAnswerBar();		
@@ -290,5 +290,16 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 			}else
 				resetColor();
 	
+	}
+
+	$scope.random = function()
+	{
+		$tempQuesiton = RandomQuestion.get(function(data){
+	//random ==? $location.path('/');
+		$scope.question = data;
+		$scope.question.pictures = [data.picture1, data.picture2, data.picture3];
+		$scope.url = WEB_DIR +'/#/share/'+data.code;
+		adjustImages();
+		});	
 	}
 }
