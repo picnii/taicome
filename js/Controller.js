@@ -304,6 +304,7 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 				$scope.question.pictures = [data.picture1, data.picture2, data.picture3];
 				$scope.url = WEB_DIR +'/#/share/'+data.code;
 				adjustImages();
+				resetColor();
 			}
 		});	
 	}
