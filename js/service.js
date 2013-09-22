@@ -17,4 +17,9 @@ angular.module('dataServices', ['ngResource']).
     get: {method:'GET' , params:{code:''}}
 
   });
+}).factory('RandomQuestion', function($resource){
+  return $resource('service/index.php/question/random', {}, {
+    get: {method:'GET' }
+
+  });
 });

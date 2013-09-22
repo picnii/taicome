@@ -12,6 +12,8 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 		$scope.level = $routeParams.level;
 	else 
 		$location.path('/'+$scope.level);
+
+
 	$scope.url = WEB_DIR + "/#/" + $scope.level;
 	$scope.shouldShowHint = false;
 	$scope.question = Question.get({level:$scope.level},function(data){
@@ -208,9 +210,7 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 				$('#shareModal').modal();
 				$scope.answer = "";		
 			}else
-				shakeAnswerBar();
-	
-		
+				shakeAnswerBar();		
 	}
 
 	$scope.checkAnswerType = function()
@@ -224,3 +224,5 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 	
 	}
 }
+
+RandomCtrl = ShareViewCtrl;
