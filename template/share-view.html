@@ -1,10 +1,11 @@
-<section class="container main">
+<section class="container main" id="{{section_id}}">
 	<aside class="control">
-		<a href="#/share/create" class="{{isShowBack()}} btn btn-inverse">ส่งมุขกลับ</a>
+		<a href="#/share/create" class="{{isShowBack()}} share btn btn-inverse">ส่งมุขกลับ</a>
+		<a href="#/random" class="{{isShowBack()}} random  btn btn-inverse">สุ่มมุขใหม่</a>
 	</aside>
 	<header style="text-align:center;">
 
-		<h1 class="logo"><span class="brand">ทายคำ</span><span class="level">จาก {{question.owner_name}}</span></h1>
+		<h1 class="logo"><span class="brand">ทายคำ</span><span class="level">จาก <a ng-href="{{question.owner_facebook_url}}" target="_blank">{{question.owner_name}}</a></span></h1>
 	</header>
 	<div class="imageContainer">
 		<div class="guess image">
