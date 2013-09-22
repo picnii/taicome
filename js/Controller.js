@@ -169,6 +169,7 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 {
 	console.log('shareview');
 	resetColor();
+	$scope.section_id = "share-section";
 	$scope.question = {};
 	$scope.status = "Share";
 	$scope.shouldShowHint = false;
@@ -226,6 +227,68 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 				resetColor();
 	
 	}
+
 }
 
-RandomCtrl = ShareViewCtrl;
+function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
+{
+	updateMenu('home');
+	console.log('shareview');
+	resetColor();
+	$scope.section_id = "random-section";
+	$scope.question = {};
+	$scope.status = "Share";
+	$scope.shouldShowHint = false;
+	
+	$tempQuesiton = RandomQuestion.get(function(data){
+	//random ==? $location.path('/');
+		$scope.question = data;
+		$scope.question.pictures = [data.picture1, data.picture2, data.picture3];
+		$scope.url = WEB_DIR +'/#/share/'+data.code;
+		adjustImages();
+	});
+
+	$scope.getHint = function()
+	{
+		//$scope.question.hint ใช้
+		if($scope.question.hint != null && $scope.question.hint != "")
+		{
+			$scope.showHint = $scope.question.hint;
+		}else
+		{
+			$scope.showHint =  "ไม่มีคำใบ้จ้า";
+		}
+		$scope.shouldShowHint = true;
+	}
+
+	$scope.isShowHint = function()
+	{
+		if($scope.shouldShowHint)
+			return "show";
+		else
+			return "hide";
+	}
+
+	$scope.checkAnswer = function()
+	{
+	
+			if($scope.answer == $scope.question.answer)
+			{
+				$scope.answer = "";	
+				$location.path('/random');
+				resetColor();
+			}else
+				shakeAnswerBar();		
+	}
+
+	$scope.checkAnswerType = function()
+	{
+	
+			if($scope.answer == $scope.question.answer)
+			{
+				colorWin();
+			}else
+				resetColor();
+	
+	}
+}
