@@ -1,7 +1,7 @@
 var WEB_DIR = "http://taicome.com";
 function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 {
-	updateMenu('home');
+	updateMenu('level');
 	
 	resetColor();
 	console.log('home');

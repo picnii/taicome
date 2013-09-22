@@ -102,6 +102,13 @@ function getUserFromFacebookAPI() {
     });
 }
 
+function getUserFromTwitterAPI()
+{
+	$.post('https://api.twitter.com/1.1/users/show.json?screen_name=npop',function(data){
+		console.log(data);
+	})
+}
+
 function saveMaxLevel(level)
 {
 	if(level > localStorage.maxLevel)
