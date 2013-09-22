@@ -1,10 +1,11 @@
 <!doctype html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="taicome">
 <head>
-    <title>ทายคำนะจ๊ะ</title>
+    <title>ทายคำ</title>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
 
    <link href="lib/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet"/>
+   <link href="fonts/asg_matrathan/stylesheet.css" type="text/css" rel="stylesheet"/>
     <!--[if lte IE 8]>
       <script type="text/javascript/json-master/json2.js" src="lib/json-master/json2.js"></script>
     <![endif]-->
@@ -36,6 +37,8 @@
       </script>
     <![endif]-->
     <style type="text/css">
+ 
+
     	.hide{
     		display: none;
     	}
@@ -54,6 +57,7 @@
         {
             margin-top:20px;
             text-align: center;
+            width:100%;
         }
 
         .answer-option
@@ -61,7 +65,7 @@
             text-align: center;;
         }
 
-        .answer-bar input
+        .answer-bar input[type="text"]
         {
             width:50%;
         }
@@ -134,10 +138,54 @@
 
         .social
         {
-            padding-top: 50px;
+            padding-top: 150px;
             text-align: center;;
         }
+
+   
+
+        .container.main
+        {
+            position: relative;
+        }
+
+        .container.main aside.control
+        {
+            position: absolute;
+            left: 0px;
+            top:20px;
+        }
+
+        #bg-correct
+        {
+            position: absolute;
+            background-color: #9EF0B1;
+            height: 100%;
+            width: 100%;
+            display: none;
+        }
+
+        #bg-cover
+        {
+             border-radius: 20px;
+            /*background: #D6F5E1;*/
+
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         
+        }
+
+        .logo
+        {
+            font-family: asg_matrathan_lightregular;
+        }
+
+        h1.logo
+        {
+            font-size: 55px;
+            padding-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -151,10 +199,20 @@
     }(document, 'script', 'facebook-jssdk'));</script>
     <div id="coverall"></div>
     <div id="bodyWrapper">
-	   <div ng-view></div>
+        <nav class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <ul class="nav">
+          <li id="home-li"><a href="#">เล่น</a></li>
+          <li id="share-li"><a href="#/share/create">ส่งมุข</a></li>
+        </ul>
+      </div>
+    </nav>
+        <div id="bg-cover">
+	       <div ng-view></div>
+        </div>
         <div class="social">
-            <div class="fb-like" data-href="http://picnii.me/taicome" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false"></div>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://picnii.me/taicome" data-text="ทายคำ" data-hashtags="taicome">Tweet</a>
+            <div class="fb-like" data-href="http://taicome" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="taicome.com" data-text="ทายคำ" data-hashtags="taicome">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         </div>
     </div>

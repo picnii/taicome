@@ -1,10 +1,10 @@
 <section class="container main">
 	<aside class="control">
-		<a href="#/{{level-1}}" class="{{isShowBack()}} btn"><i class="icon-backward"></i></a>
+		<a href="#/share/create" class="{{isShowBack()}} btn btn-inverse">ส่งมุขกลับ</a>
 	</aside>
 	<header style="text-align:center;">
 
-		<h1 class="logo"><span class="brand">ทายคำ</span><span class="level">ด่านที่ {{question.level}}</span></h1>
+		<h1 class="logo"><span class="brand">ทายคำ</span><span class="level">จาก {{question.owner_name}}</span></h1>
 	</header>
 	<div class="imageContainer">
 		<div class="guess image">
@@ -33,7 +33,7 @@
 <div id="shareModal" class="modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Share</h3>
+    <h3>{{status}}</h3>
   </div>
   <div class="modal-body">
 		<a href="#" 
@@ -44,7 +44,7 @@
 		      'width=626,height=436'); 
 		    return false;"><img src="images/share-facebook.png" /></a>
 		 <a href="https://twitter.com/share" data-url="{{url}}" target="_blank"  data-text="{{answer}} {{url}}" data-hashtags="taicome"><img src="images/share-twitter.png" /></a>
-  		<label>ส่งผ่าน url(เพื่อนต้งเล่นถึงก่อนนะ)</label>
+  		<label>ส่งผ่าน url</label>
     	<input type="text" ng-model="url" />
 
 
