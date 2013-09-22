@@ -296,10 +296,15 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 	{
 		$tempQuesiton = RandomQuestion.get(function(data){
 	//random ==? $location.path('/');
-		$scope.question = data;
-		$scope.question.pictures = [data.picture1, data.picture2, data.picture3];
-		$scope.url = WEB_DIR +'/#/share/'+data.code;
-		adjustImages();
+			if($scope.question.id == data.id)
+				$scope.random();
+			else
+			{
+				$scope.question = data;
+				$scope.question.pictures = [data.picture1, data.picture2, data.picture3];
+				$scope.url = WEB_DIR +'/#/share/'+data.code;
+				adjustImages();
+			}
 		});	
 	}
 }
