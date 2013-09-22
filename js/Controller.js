@@ -173,6 +173,8 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 	$scope.status = "Share";
 	$scope.shouldShowHint = false;
 	$scope.url = WEB_DIR +'/#/share/'+$routeParams.code;
+	//tempQuesiton = RandomQuestion.get(function(data){})
+	//random ==? $location.path('/');
 	$tempQuestion = Share.get({code:$routeParams.code},function(data){
 		console.log(data);
 		$scope.question = data;
