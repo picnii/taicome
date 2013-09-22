@@ -54,6 +54,7 @@ function adjustImages()
 
 function shakeAnswerBar()
 {
+	$('#fail-sound')[0].play();
 	$('.answer-bar input').animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75).animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75).animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75).animate({marginLeft:"+=25"}, 75).animate({marginLeft:"-=25"},75)
 }
 
@@ -79,6 +80,7 @@ function learnRegExp(){
 
 function colorWin()
 {
+	$('#pass-sound')[0].play();
 	$('body').css({background:'#9EF0B1'});
 	$('#bg-cover').css({background:'#D6F5E1'});
 }
@@ -94,6 +96,7 @@ function getUserFromFacebookAPI() {
     FB.api('/me', function(response) {
     	console.log(response)
       var scope = angular.element($("#owner-name")).scope();
+      if(typeof(scope) != "undefined")
       scope.$apply(function(){
 
 		scope.question.owner_name = response.name;
