@@ -88,3 +88,36 @@ function resetColor()
 	$('body').css({background:'#eee'});
 	$('#bg-cover').css({background:'#eee'});
 }
+
+
+function getUserFromFacebookAPI() {
+    FB.api('/me', function(response) {
+    	console.log(response)
+      var scope = angular.element($("#owner-name")).scope();
+      scope.$apply(function(){
+
+		scope.question.owner_name = response.name;
+		scope.question.owner_facebook_url = response.link;
+		});
+    });
+}
+
+function saveMaxLevel(level)
+{
+	if(level > localStorage.maxLevel)
+	{
+		localStorage.maxLevel = level;
+	}
+}
+function loadMaxLevel()
+{
+	if (localStorage.maxLevel)
+  	{
+  		localStorage.maxLevel=Number(localStorage.maxLevel);
+  		
+  	}else
+  	{
+  		localStorage.maxLevel=1;
+  	}
+	return localStorage.maxLevel;
+}

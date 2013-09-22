@@ -4,19 +4,22 @@
 			<form ng-submit="send()">
 				<h3>มุข</h3>
 				<label>คำตอบ:</label><input type="text" ng-model="question.answer" placeholder="คำตอบ" required /><br/>
-				<label>คำใบ้:</label><input type="text" ng-model="question.hint" placeholder="คำใบ้" /><br/>
-				<label>พยางค์:</label><input type="number" ng-model="question.syllable" placeholder="พยางค์" /><br/>
-				<label>รูปภาพที่1:</label><input type="text" ng-model="question.picture1" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
+				<label>คำใบ้:</label><input type="text" ng-model="question.hint" placeholder="คำใบ้"  required/><br/>
+				<label>พยางค์:</label><input type="number" ng-model="question.syllable" placeholder="พยางค์"  required /><br/>
+				<label>รูปภาพที่1:</label><input type="text"  required ng-model="question.picture1" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
 				<label>รูปภาพที่2:</label><input type="text" ng-model="question.picture2" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
 				<label>รูปภาพที่3:</label><input type="text" ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
-				<h3>ข้อมูลผู้ส่ง</h3>
-				<label>ชื่อผู้ส่ง:</label><input type="text" ng-model="question.owner_name" placeholder="ฉายา"/><br/>
+				<h3>ยืนยันตัวตนผู้ส่ง</h3>
+				<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button><br/>
+				<span>{{question.owner_name}}</span><br/>
+				<input id="owner-name" type="hidden"  required ng-model="question.owner_name" placeholder="ฉายา"/>
 
-				<label>Facebook Account:</label><input type="text" ng-model="question.owner_facebook_url" placeholder="url facebook ตัวเอง"/> <span>หรือ</span>
-				<label>Twitter Account:</label><input type="text" ng-model="question.owner_twitter_url" placeholder="url twitter ตัวเอง"/><br/>
+				<input id="facebook-url" type="hidden" ng-model="question.owner_facebook_url" placeholder="url facebook ตัวเอง"/>
+				<input type="hidden" ng-model="question.owner_twitter_url" placeholder="url twitter ตัวเอง"/><br/>
 				<input type="checkbox" ng-model="question.is_suggest">แนะนำมุขนี้ให้เว็บ taicome.com<br/>
-
-				<input type="submit" class="btn"/>
+				<br/>
+				
+				<input type="submit" class="btn" value="สร้างมุก"/>
 
 			</form>
 		</div>

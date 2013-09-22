@@ -7,11 +7,11 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 	console.log('home');
 	$('#input-answer').focus();
 	$scope.level = loadCurrentLevel();
-	
-	if($routeParams.level !=null && $routeParams.level <= $scope.level)
+	$scope.maxLevel = loadMaxLevel()
+		if($routeParams.level !=null && $routeParams.level <= $scope.maxLevel)
 		$scope.level = $routeParams.level;
 	else 
-		$location.path('/'+$scope.level);
+		$location.path('/'+$scope.maxLevel);
 
 
 	$scope.url = WEB_DIR + "/#/" + $scope.level;
@@ -55,6 +55,7 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 	{
 		$scope.level++;
 		saveLevel($scope.level);
+		saveMaxLevel($scope.level);
 		/*console.log($scope.level);
 		$scope.question = Question.get({level:$scope.level},function(){
 			if($scope.question.status == "win")
@@ -136,7 +137,7 @@ function ShareCtrl($scope, $rootScope, $location, Suggest)
 	updateMenu('share');
 	resetColor();
 	$scope.adjustImages = adjustImages;
-
+	$scope.question = {};
 	$scope.getSenderUrl = function()
 	{
 
