@@ -1,4 +1,4 @@
-var app = angular.module('taicome', ['dataServices']).
+var app = angular.module('taicome', ['dataServices','angulartics', 'angulartics.google.analytics']).
 		  config(['$routeProvider', function($routeProvider) {
 		  $routeProvider.
 		  	  when('/', {templateUrl: 'template/home.html',   controller: HomeCtrl}).
@@ -10,4 +10,13 @@ var app = angular.module('taicome', ['dataServices']).
               
               
 		      otherwise({redirectTo: '/'});
-		}]);
+		}]).directive("fbLogin", function($rootScope) {
+    return function (scope, iElement, iAttrs) {
+        if (FB) {
+            FB.XFBML.parse(iElement[0]);
+        }
+    };
+});
+
+
+

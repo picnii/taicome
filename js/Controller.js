@@ -8,10 +8,10 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 	$('#input-answer').focus();
 	$scope.level = loadCurrentLevel();
 	$scope.maxLevel = loadMaxLevel()
-		if($routeParams.level !=null && $routeParams.level <= $scope.maxLevel)
+	if($routeParams.level !=null && $routeParams.level <= $scope.maxLevel)
 		$scope.level = $routeParams.level;
 	else 
-		$location.path('/'+$scope.maxLevel);
+		$location.path('/'+$scope.level);
 
 
 	$scope.url = WEB_DIR + "/#/" + $scope.level;
@@ -123,7 +123,8 @@ function WinCtrl($scope, $rootScope, $location)
 	$scope.test = $rootScope.test;
 	//$location.path('/');
 	adjustImages();
-	
+	$scope.level = loadCurrentLevel();
+	saveLevel($scope.level-1);
 	$scope.replay = function()
 	{
 		localStorage.lastplayedlevel = 1;
@@ -135,6 +136,7 @@ function WinCtrl($scope, $rootScope, $location)
 function ShareCtrl($scope, $rootScope, $location, Suggest)
 {
 	updateMenu('share');
+	getUserFromFacebookAPI();
 	resetColor();
 	$scope.adjustImages = adjustImages;
 	$scope.question = {};
@@ -147,6 +149,12 @@ function ShareCtrl($scope, $rootScope, $location, Suggest)
 			return  $scope.question.facebook;
 		else
 			return "#/share";
+	}
+
+	$scope.login = function()
+	{
+		if(typeof(FB) != "undefined")
+		FB.login();
 	}
 
 	$scope.send = function()
@@ -171,6 +179,11 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 	resetColor();
 	$scope.section_id = "share-section";
 	$scope.question = {};
+	if($scope.isSaveUser)
+	{
+		$scope.question.owner_name = $scope.user.name;
+		$scope.question.owner_facebook_url = $scope.user.url;
+	}
 	$scope.status = "Share";
 	$scope.shouldShowHint = false;
 	$scope.url = WEB_DIR +'/#/share/'+$routeParams.code;

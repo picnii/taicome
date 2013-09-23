@@ -10,8 +10,8 @@
 				<label>รูปภาพที่2:</label><input type="text" ng-model="question.picture2" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
 				<label>รูปภาพที่3:</label><input type="text" ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
 				<h3>ยืนยันตัวตนผู้ส่ง</h3>
-				<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button><br/>
-				<span>{{question.owner_name}}</span><br/>
+<button ng-click="login()" class="{{isShowLogin()}} btn btn-primary">ดึงข้อมูลจาก Facebook</button>
+				<span>{{question.owner_name}}</span><img src="images/accept.gif" class="{{!isShowLogin()}}"><br/>
 				<input id="owner-name" type="hidden"  required ng-model="question.owner_name" placeholder="ฉายา"/>
 
 				<input id="facebook-url" type="hidden" ng-model="question.owner_facebook_url" placeholder="url facebook ตัวเอง"/>

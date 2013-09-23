@@ -1,5 +1,27 @@
 app.run(function($rootScope) {
-		  
+	$rootScope.user = {};
+	$rootScope.saveUser = function(username, url)		  
+	{
+		$rootScope.user.name = username;
+		$rootScope.user.url = url;
+	}
+
+	$rootScope.isSaveUser = function()
+	{
+		if(typeof($rootScope.user.name) == 'undefined' || typeof($rootScope.user.url) == 'undefined')
+			return false
+		else
+			return true;
+	}
+
+	$rootScope.isShowLogin = function()
+	{
+		if(!$rootScope.isSaveUser())
+			return "show";
+		else
+			return "hide";
+	}
+
 
 });
 
@@ -93,6 +115,7 @@ function resetColor()
 
 
 function getUserFromFacebookAPI() {
+	if(typeof(FB)!= "undefined")
     FB.api('/me', function(response) {
     	console.log(response)
       var scope = angular.element($("#owner-name")).scope();
@@ -101,6 +124,7 @@ function getUserFromFacebookAPI() {
 
 		scope.question.owner_name = response.name;
 		scope.question.owner_facebook_url = response.link;
+		scope.saveUser(scope.question.owner_name , scope.question.owner_facebook_url );
 		});
     });
 }
