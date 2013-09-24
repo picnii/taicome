@@ -1,8 +1,8 @@
-<section class="container">
+<section class="container" id="suggest-section">
 	<div class="row">
 		<div class="span4">
+			<h2>ส่งมุข</h2>
 			<form ng-submit="send()">
-				<h3>มุข</h3>
 				<label>คำตอบ:</label><input type="text" ng-model="question.answer" placeholder="คำตอบ" required /><br/>
 				<label>คำใบ้:</label><input type="text" ng-model="question.hint" placeholder="คำใบ้"  required/><br/>
 				<label>พยางค์:</label><input type="number" ng-model="question.syllable" placeholder="พยางค์"  required /><br/>
@@ -11,7 +11,7 @@
 				<label>รูปภาพที่3:</label><input type="text" ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ" /><br/>
 				<h3>ยืนยันตัวตนผู้ส่ง</h3>
 <button ng-click="login()" class="{{isShowLogin()}} btn btn-primary">ดึงข้อมูลจาก Facebook</button>
-				<span>{{question.owner_name}}</span><img src="images/accept.gif" class="{{!isShowLogin()}}"><br/>
+				<span>{{question.owner_name}}</span><img src="images/accept.gif" class="{{isShowLogin('inverse')}}"><br/>
 				<input id="owner-name" type="hidden"  required ng-model="question.owner_name" placeholder="ฉายา"/>
 
 				<input id="facebook-url" type="hidden" ng-model="question.owner_facebook_url" placeholder="url facebook ตัวเอง"/>
@@ -19,13 +19,14 @@
 				<input type="checkbox" ng-model="question.is_suggest">แนะนำมุขนี้ให้เว็บ taicome.com<br/>
 				<br/>
 				
-				<input type="submit" class="btn" value="สร้างมุข"/>
+				<input type="submit" class="btn btn-info" value="สร้างมุข"/>
 
 			</form>
 		</div>
 		<div class="span8">
+			<h2>ตัวอย่าง</h2>
 			<div>
-				แนะนำมุขโดย <a ng-href="{{question.owner_facebook_url}}" target="_blank">{{question.owner_name}}</a>
+				ทายคำจาก <a ng-href="{{question.owner_facebook_url}}" target="_blank">{{question.owner_name}}</a>
 			</div>
 			<div class="imageContainer">
 				<div class="guess image">

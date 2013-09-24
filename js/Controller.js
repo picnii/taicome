@@ -4,15 +4,20 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 	updateMenu('level');
 	
 	resetColor();
-	console.log('home');
+	
 	$('#input-answer').focus();
 	$scope.level = loadCurrentLevel();
-	$scope.maxLevel = loadMaxLevel()
-	if($routeParams.level !=null && $routeParams.level <= $scope.maxLevel)
+	$scope.maxLevel = Number(loadMaxLevel())
+
+	if($routeParams.level !=null && Number($routeParams.level) <= $scope.maxLevel)
 		$scope.level = $routeParams.level;
 	else 
 		$location.path('/'+$scope.level);
 
+
+	$rootScope.updateBadge('level', {level:$scope.maxLevel}, function(){
+		$('#input-answer').focus();
+	});	
 
 	$scope.url = WEB_DIR + "/#/" + $scope.level;
 	$scope.shouldShowHint = false;
@@ -35,7 +40,10 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 				$scope.getNewQuestion();
 				$scope.answer = "";		
 			}else
+			{
 				shakeAnswerBar();
+				$scope.getHint();
+			}
 		})
 		
 	}
@@ -82,7 +90,7 @@ function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 		{
 			$scope.showHint =  "ไม่มีคำใบ้จ้า";
 		}
-		$scope.shouldShowHint = true;
+		$scope.shouldShowHint = !$scope.shouldShowHint;
 	}
 
 	$scope.isShowHint = function()
@@ -121,9 +129,15 @@ function WinCtrl($scope, $rootScope, $location)
 	clearMenu();
 	resetColor();
 	$scope.test = $rootScope.test;
+
 	//$location.path('/');
 	adjustImages();
 	$scope.level = loadCurrentLevel();
+	$scope.maxLevel = loadMaxLevel();
+	$rootScope.updateBadge('win',{level: $scope.maxLevel}, function(){
+		shareBadge($rootScope.GOLD_BADGE_IMG);
+	});
+
 	saveLevel($scope.level-1);
 	$scope.replay = function()
 	{
@@ -136,10 +150,17 @@ function WinCtrl($scope, $rootScope, $location)
 function ShareCtrl($scope, $rootScope, $location, Suggest)
 {
 	updateMenu('share');
-	getUserFromFacebookAPI();
+	$scope.question = {};
+	if(!$rootScope.isSaveUser())
+		getUserFromFacebookAPI();
+	else
+	{
+		$scope.question.owner_name = $rootScope.user.name;
+		$scope.question.owner_facebook_url = $rootScope.user.url;
+	}
 	resetColor();
 	$scope.adjustImages = adjustImages;
-	$scope.question = {};
+	
 	$scope.getSenderUrl = function()
 	{
 
@@ -167,7 +188,13 @@ function ShareCtrl($scope, $rootScope, $location, Suggest)
 			if(data.result)
 			{
 				$scope.url = WEB_DIR+"/#/share/"+data.code;
-				$('#shareModal').modal();
+				if($scope.question.is_suggest)
+					$rootScope.updateBadge('share', function(){
+						$('#shareModal').modal();
+					});	
+				else
+					$('#shareModal').modal();
+				$scope.question ={};
 			}
 		})
 	}
@@ -175,8 +202,10 @@ function ShareCtrl($scope, $rootScope, $location, Suggest)
 
 function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 {
+	clearMenu();
 	console.log('shareview');
 	resetColor();
+	$('#input-answer').focus();
 	$scope.section_id = "share-section";
 	$scope.question = {};
 	if($scope.isSaveUser)
@@ -207,7 +236,7 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 		{
 			$scope.showHint =  "ไม่มีคำใบ้จ้า";
 		}
-		$scope.shouldShowHint = true;
+		$scope.shouldShowHint = !$scope.shouldShowHint;
 	}
 
 	$scope.isShowHint = function()
@@ -227,7 +256,10 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 				$('#shareModal').modal();
 				$scope.answer = "";		
 			}else
+			{
 				shakeAnswerBar();		
+				$scope.getHint();
+			}
 	}
 
 	$scope.checkAnswerType = function()
@@ -247,6 +279,7 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 {
 	updateMenu('home');
 	console.log('shareview');
+	$('#input-answer').focus();
 	resetColor();
 	$scope.section_id = "random-section";
 	$scope.question = {};
@@ -271,7 +304,7 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 		{
 			$scope.showHint =  "ไม่มีคำใบ้จ้า";
 		}
-		$scope.shouldShowHint = true;
+		$scope.shouldShowHint = !$scope.shouldShowHint;
 	}
 
 	$scope.isShowHint = function()
@@ -291,7 +324,10 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 				$scope.random();
 				resetColor();
 			}else
+			{
 				shakeAnswerBar();		
+				$scope.getHint();
+			}
 	}
 
 	$scope.checkAnswerType = function()
@@ -316,9 +352,47 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 				$scope.question = data;
 				$scope.question.pictures = [data.picture1, data.picture2, data.picture3];
 				$scope.url = WEB_DIR +'/#/share/'+data.code;
+				$scope.shouldShowHint = false;
 				adjustImages();
 				resetColor();
 			}
 		});	
 	}
+}
+
+function ProfileCtrl($scope, $rootScope, $location, Share)
+{
+	updateMenu('profile');
+	resetColor()
+	$scope.clear_level = Number(loadMaxLevel());
+	$scope.max_level = 50
+	$scope.badges = $rootScope.badges;
+	$scope.progress = $scope.clear_level / $scope.max_level * 100;
+	console.log('profile');
+	if(!$rootScope.isSaveUser())
+		getUserFromFacebookAPI("profile-section" ,function(){
+			console.log('callback');
+			if($rootScope.isSaveUser())
+			$scope.questions = Share.query({facebook_url:$rootScope.user.url}, function(data){
+				console.log(data);
+			} );
+			else
+				console.log('none user');	
+		});
+	else
+	{
+		$scope.questions = Share.query({facebook_url:$rootScope.user.url}, function(data){
+				console.log(data);
+			} );
+	}
+
+	$scope.login = function()
+	{
+		if(typeof(FB) != "undefined")
+			FB.login();
+	}
+	
+	console.log($rootScope.badges)
+	console.log($rootScope.user)
+
 }

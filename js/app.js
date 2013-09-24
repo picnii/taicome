@@ -6,6 +6,7 @@ var app = angular.module('taicome', ['dataServices','angulartics', 'angulartics.
 		  	  when('/share/create', {templateUrl:'template/share.html', controller:ShareCtrl}).
 		  	  when('/share/:code', {templateUrl:'template/share-view.html', controller:ShareViewCtrl}).
 		  	  when('/win', {templateUrl:'template/win.html', controller:WinCtrl}).
+		  	  when('/profile', {templateUrl: 'template/profile.html',   controller: ProfileCtrl}).
 		  	  when('/:level', {templateUrl: 'template/home.html',   controller: HomeCtrl}).
               
               

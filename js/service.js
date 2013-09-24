@@ -13,13 +13,13 @@ angular.module('dataServices', ['ngResource']).
 
   });
 }).factory('Share', function($resource){
-  return $resource('service/index.php/question/suggestView', {}, {
-    get: {method:'GET' , params:{code:''}}
-
+  return $resource('service/index.php/question/:view', {}, {
+    get: {method:'GET' , params:{code:'',view:'suggestView'}},
+    query: {method:'GET' , params:{view:'viewOwn'}, isArray:true}
   });
 }).factory('RandomQuestion', function($resource){
   return $resource('service/index.php/question/random', {}, {
     get: {method:'GET' }
 
   });
-});
+})

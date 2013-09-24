@@ -2,6 +2,7 @@
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="taicome">
 <head>
     <title>ทายคำ</title>
+    <meta property="og:image" content="http://taicome.com/images/logo.png"/>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
 
    <link href="lib/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet"/>
@@ -187,7 +188,7 @@
         
         }
 
-        .logo
+        .logo, #suggest-section h2
         {
             font-family: web_banga;
         }
@@ -206,6 +207,11 @@
         #random-section .random.btn, #share-section .share.btn
         {
           display: inline;
+        }
+
+        span.share.level
+        {
+          font-size:30px;
         }
     </style>
 </head>
@@ -272,6 +278,7 @@
           <li id="level-li"><a href="#">เล่นตลุยด่าน</a></li>
           <li id="home-li"><a href="#/random">เล่นมุขจากทางบ้าน</a></li>
           <li id="share-li"><a href="#/share/create">ส่งมุข</a></li>
+          <li id="profile-li" class="pull-right"><a href="#/profile">โปรไฟล์</a></li>
         </ul>
       </div>
     </nav>
@@ -298,6 +305,20 @@
       <source src="sounds/polish-xrikazen-7425_hifi.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
     </audio>
+
+<div id="earnModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>{{earnModal.subject}}</h3>
+  </div>
+  <div class="modal-body" style="text-align:center;">
+      <img ng-src="{{earnModal.image}}" />
+      <p>{{earnModal.content}}</p>
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-danger" data-dismiss="modal" >ปิด</button>
+    
+  </div>
 </body>
 
 </html>

@@ -1,0 +1,59 @@
+<section class="container profile" id="profile-section">
+	<h2>Level ที่ผ่าน </h2>
+	<div class="progress progress-striped active">
+	  <div class="bar" style="width: {{progress}}%;"></div>
+	</div>
+	<h2>Badge</h2>
+	<div class="madel">
+		<a ng-repeat="badge in badges" ng-href="#/profile" ng-click="shareBadge(badge)"><img ng-src="{{badge}}"></a>
+		<!--<input type="image"  ng-repeat="badge in badges" ng-src="{{badge}}" ng-click="shareBadge(badge)">-->
+	</div>
+	<h2 class="{{isShowLogin('inverse')}}">มุขที่สร้าง</h2>
+	<button ng-click="login()" class="{{isShowLogin()}} btn btn-primary">ดูมุขที่สร้าง</button>
+	<div class="joke" ng-repeat="question in questions" >
+		<a href="#/share/{{question.code}}">
+			<img ng-repeat ="picture in question.pictures" ng-src="{{picture}}" />
+		</a>
+	</div>
+</section>
+<style type="text/css">
+	.joke img
+	{	
+		max-height:100px;
+		width: auto;
+	}
+
+	.joke
+	{
+		margin-bottom: 10px;
+		padding:5px;
+		border-radius: 5px;
+		background-color:black;
+		display: inline-block;;
+		margin-right: 10px;
+	}
+
+	div.badge
+	{
+		padding:20px;
+		border-radius: 10px;
+	}
+
+	.madel 
+	{
+		margin-bottom: 10px;
+	}
+
+	.madel img
+	{
+		max-width:100px;
+		height: auto;;
+		margin-right: 10px;
+	}
+
+	.profile h2
+	{
+		font-family: web_banga;
+	}
+
+</style>
