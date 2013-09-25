@@ -21,15 +21,15 @@
 		<a href="#/share/create" ng-click="togglePicture()">
 			<div class="guess image" style="min-height:150px;min-width:400px;">
 				<img id="pic-target-0" ng-src="{{question.picture1}}" >
-				<img id="pic-target-1" ng-src="{{question.picture2}}" >
-				<img id="pic-target-2" ng-src="{{question.picture3}}" >
+				<img id="pic-target-1"  ng-src="{{question.picture2}}" >
+				<img id="pic-target-2"  ng-src="{{question.picture3}}" >
 			</div>
 		</a>
 	</div>
 	<section class="picture-helper">
 		<div >
 			<span class="logo" style="font-size:35px;">เลือกรูป</span>
-			<button ng-click="togglePicture()" class="btn btn-primary"><i class="icon-ok-sign  icon-white"></i></button>
+			
 		</div>
 		<ul class="nav nav-pills">
 		  <li ng-repeat="item in menu" id="{{item.name}}-menu" >
@@ -51,7 +51,7 @@
 		
 		<div id="picture-helper">
 			<div class="item" ng-repeat="img in testPictures">
-				<a href="#/share/create" ng-click="selectPic(img.img)"><img  ng-src="{{img.img}}" style="height:" /></a>
+				<a href="#/share/create" ng-click="selectPic(img.img)"><img  ng-src="{{img.img}}" style="max-height:170px;width:auto;"  /></a>
 			</div>
 		</div>
 	</section>
