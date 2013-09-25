@@ -22,4 +22,9 @@ angular.module('dataServices', ['ngResource']).
     get: {method:'GET' }
 
   });
+}).factory('Picture', function($resource){
+  return $resource('data/:type.json', {}, {
+    query: {method:'GET'  , params:{type:'celeb'}, isArray:true}
+
+  });
 })

@@ -1,5 +1,6 @@
 app.run(function($rootScope) {
 	$rootScope.user = {};
+	$rootScope.actionCount = 0;
 	var badge_img_prefix_url = "images/";
 	var badge_img_suffix_url ="-badge.png";
 	var WEB_DIR = "http://taicome.com"
@@ -166,6 +167,20 @@ app.run(function($rootScope) {
 			    }
 			  }
 			);
+	}
+
+	$rootScope.encodeUrl = function(url)
+	{
+		return encodeURIComponent(url);
+	}
+
+	$rootScope.updateInviteShare = function(notInvite)
+	{	
+		$rootScope.actionCount++
+		if($rootScope.actionCount % 9 == 0 && typeof(notInvite) == 'undefined')
+			$rootScope.showDialog("ผมว่าคุณใช้ได้", "images/logo.png", "มาลองสร้างมุขของคุณเองกันเถอะ คุณสามารถสร้างมุขนี้แล้วส่งไปให้เพื่อนๆ<br/> คนที่คุณรู้จัก หรือแม้กระทั่งคนในเว็บก็ได้ หากพร้อมแล้ว.. <br/><a href='#/share/create' class='btn btn-info btn-large' data-dismiss='modal'>มาสร้างมุขกันเลย!</a>", 10, function(){
+				$('#input-answer').focus();
+			});
 	}
 
 });

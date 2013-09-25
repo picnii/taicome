@@ -12,12 +12,24 @@ var app = angular.module('taicome', ['dataServices','angulartics', 'angulartics.
               
 		      otherwise({redirectTo: '/'});
 		}]).directive("fbLogin", function($rootScope) {
-    return function (scope, iElement, iAttrs) {
-        if (FB) {
-            FB.XFBML.parse(iElement[0]);
-        }
-    };
-});
+			    return function (scope, iElement, iAttrs) {
+			        if (FB) {
+			            FB.XFBML.parse(iElement[0]);
+			        }
+			    };
+			}).directive("fbLike", function($rootScope) {
+			    return function (scope, iElement, iAttrs) {
+			    	console.log('like directive')
+  
+			        if (FB) {
+			            FB.XFBML.parse(iElement[0]);
+			        }
 
 
+			        iAttrs.$observe('dataHref', function(value) {
+			        	console.log('change href')
+					   FB.XFBML.parse(iElement[0]);
+					});
+			    };
+			});
 

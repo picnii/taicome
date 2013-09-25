@@ -18,6 +18,7 @@
 
   <script src="lib/angulartics/angulartics.js"></script>
   <script src="lib/angulartics/angulartics-google-analytics.js"></script>
+  <script src="lib/masonry.pkgd.min.js"></script>
   
 	<meta charset="utf-8"> 
     <script type="text/javascript" src="js/app.js"></script>
@@ -130,7 +131,12 @@
 
         footer.footer {
             text-align: center;
-            margin-top: -20px;
+            margin-top: -90px;
+        }
+
+        .footer.push
+        {
+          padding-top: 90px;
         }
 
         #coverall
@@ -150,7 +156,7 @@
 
         .social
         {
-            padding-top: 150px;
+            padding-bottom: 20px;
             text-align: center;;
         }
 
@@ -285,16 +291,17 @@
         <div id="bg-cover">
 	       <div ng-view></div>
         </div>
-        <div class="social">
+       <div class="footer push"></div>
+    </div>
+    
+    <footer class="footer">
+       <div class="social">
             <div class="fb-like" data-href="http://taicome.com" data-width="450" data-layout="button_count" data-show-faces="true" data-send="false"></div>
             <a href="https://twitter.com/share" class="twitter-share-button" data-url="taicome.com" data-text="ทายคำ" data-hashtags="taicome">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
         </div>
-    </div>
-
-    <footer class="footer">
-        ภาพทั้งหมดนำมาจาก Google Search พัฒนาโดยทีมงาน <a href="https://www.facebook.com/taicome">ทายคำ</a>
+        ภาพทั้งหมดนำมาจาก Google Search พัฒนาโดยทีมงาน <a href="https://www.facebook.com/taicome">ทายคำ</a> หากมีปัญหาใดๆ(เล่นไม่ผ่าน เจอBug กรุณาแจ้งที่) <a href="https://www.facebook.com/taicome">Facebook Page</a>
 
     </footer>
     <audio id="fail-sound" controls class="hide">
@@ -312,8 +319,8 @@
     <h3>{{earnModal.subject}}</h3>
   </div>
   <div class="modal-body" style="text-align:center;">
-      <img ng-src="{{earnModal.image}}" />
-      <p>{{earnModal.content}}</p>
+      <img ng-src="{{earnModal.image}}"  style="max-height:150px;max-width:150px;"/>
+      <div ng-bind-html-unsafe="earnModal.content"></div>
   </div>
   <div class="modal-footer">
    <button type="button" class="btn btn-danger" data-dismiss="modal" >ปิด</button>

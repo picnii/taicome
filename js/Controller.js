@@ -1,23 +1,35 @@
 var WEB_DIR = "http://taicome.com";
 function HomeCtrl($scope, $rootScope, Question, $location, Answer, $routeParams)
 {
+	
 	updateMenu('level');
 	
 	resetColor();
 	
 	$('#input-answer').focus();
 	$scope.level = loadCurrentLevel();
-	$scope.maxLevel = Number(loadMaxLevel())
+	$scope.maxLevel = Number(loadMaxLevel());
+
 
 	if($routeParams.level !=null && Number($routeParams.level) <= $scope.maxLevel)
 		$scope.level = $routeParams.level;
 	else 
 		$location.path('/'+$scope.level);
 
+	
+	$rootScope.updateInviteShare();
 
 	$rootScope.updateBadge('level', {level:$scope.maxLevel}, function(){
 		$('#input-answer').focus();
 	});	
+	/* temp before directive can update */
+	setTimeout(function(){
+		if (typeof(FB) != 'undefined') {
+			        FB.XFBML.parse();
+			    }
+	}, 100)
+				
+	/* end temp */
 
 	$scope.url = WEB_DIR + "/#/" + $scope.level;
 	$scope.shouldShowHint = false;
@@ -147,7 +159,7 @@ function WinCtrl($scope, $rootScope, $location)
 	}
 }
 
-function ShareCtrl($scope, $rootScope, $location, Suggest)
+function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 {
 	updateMenu('share');
 	$scope.question = {};
@@ -160,7 +172,87 @@ function ShareCtrl($scope, $rootScope, $location, Suggest)
 	}
 	resetColor();
 	$scope.adjustImages = adjustImages;
+
 	
+
+	$scope.picIndex = 0;
+
+	$scope.changeAlphaPics =function(alpha)
+	{
+		$('#pic-target-0').css('opacity', alpha);
+		$('#pic-target-1').css('opacity', alpha);
+		$('#pic-target-2').css('opacity', alpha);
+	}
+
+	$scope.selectPic = function(pic)
+	{
+		$scope.changeAlphaPics(0.4)
+		if($scope.picIndex % 3 == 0)
+			$scope.question.picture1 = pic
+		if($scope.picIndex % 3 == 1)
+			$scope.question.picture2 = pic
+		if($scope.picIndex % 3 == 2)
+			$scope.question.picture3 = pic
+		var mod_target = ($scope.picIndex) % 3;
+		$('#pic-target-'+mod_target).css('opacity', 1);
+		$scope.picIndex ++
+		$scope.adjustImages();
+	}
+	$scope.menu = [
+		{name:'celeb', description:'คนดัง'},
+		{name:'animal', description:'สัตว์'},
+		{name:'action', description:'การกระทำ'},
+		{name:'place', description:'สถานที่'},
+		{name:'stuff', description:'สิ่งของ'},
+		{name:'url', description:'ใส่รูปเองจาก url ภาพ'}
+	];
+	$scope.selecType = function(type)
+	{
+		$scope.changeAlphaPics(1);
+		for(var i=0; i < $scope.menu.length; i++)
+			$('#'+$scope.menu[i].name+'-menu').removeClass('active');
+		$('#'+type+'-menu').addClass('active');
+		if(type == 'url')
+		{
+			$('#picture-toolbox').show();
+			$('#picture-helper').hide();
+			return 'url';
+		}else
+		{
+			$('#picture-toolbox').hide();
+			$('#picture-helper').show();
+			$scope.testPictures = Picture.query({type:type}, function(data){
+				setTimeout(function(){
+					var container = document.querySelector('#picture-helper');
+					var msnry = new Masonry( container, {
+					  // options
+					  columnWidth: 0,
+					  itemSelector: '.item'
+					});
+				}, 100)
+				
+
+			});	
+		}		
+	}
+
+
+
+	$scope.clearPicture = function()
+	{
+		$scope.changeAlphaPics(1)
+		$scope.question.picture1 = null;
+		$scope.question.picture2 = null;
+		$scope.question.picture3 = null;
+	}
+
+	$scope.togglePicture = function()
+	{
+		$scope.changeAlphaPics(1)
+		$('.picture-helper').toggle();
+	}
+
+
 	$scope.getSenderUrl = function()
 	{
 
@@ -216,6 +308,7 @@ function ShareViewCtrl($scope, $rootScope, $location, Share, $routeParams)
 	$scope.status = "Share";
 	$scope.shouldShowHint = false;
 	$scope.url = WEB_DIR +'/#/share/'+$routeParams.code;
+	
 	//tempQuesiton = RandomQuestion.get(function(data){})
 	//random ==? $location.path('/');
 	$tempQuestion = Share.get({code:$routeParams.code},function(data){
@@ -355,6 +448,14 @@ function RandomCtrl($scope, $rootScope, $location, RandomQuestion, $routeParams)
 				$scope.shouldShowHint = false;
 				adjustImages();
 				resetColor();
+				/* temp before directive can update */
+				setTimeout(function(){
+					if (typeof(FB) != 'undefined') {
+						        FB.XFBML.parse();
+						    }
+				}, 100)
+							
+				/* end temp */
 			}
 		});	
 	}
