@@ -95,7 +95,12 @@ app.run(function($rootScope) {
 			console.log(typeof($rootScope.badges[target]) );
 			console.log($rootScope.badges[target] )
 			if(typeof($rootScope.badges[target]) == 'undefined' || $rootScope.badges[target] != img)
-				$rootScope.showDialog(badge_case[badge].subject, badge_case[badge].img, badge_case[badge].content, 2, callback);
+				if(FB)
+					$rootScope.shareBadge(badge_case[badge].img);
+				else
+					$rootScope.showDialog(badge_case[badge].subject, badge_case[badge].img, badge_case[badge].content, 2, callback);
+			else if(typeof(callback) != 'undefined')
+				callback();
 			$rootScope.badges[target] = img;
 			$rootScope.saveBadge();
 		}else
@@ -133,7 +138,7 @@ app.run(function($rootScope) {
 			;
 				break;
 			case 'share':
-			 	$rootScope.earnBadge('thankyou');
+			 	$rootScope.earnBadge('thankyou', params);
 			 	break;
 			;
 			case 'win':
@@ -144,19 +149,19 @@ app.run(function($rootScope) {
 		}
 	}
 
-	$rootScope.shareBadge = function(badgeUrl)
+	$rootScope.shareBadge = function(badgeUrl, force)
 	{
 		var badge = $rootScope.loadMedal(badgeUrl);
 		var prefix = WEB_DIR +"/";
 		//{at: 0, img: "images/gold-badge.png", subject: "เมพพ", content: "กราบ.. กราบ.. กราบ.."} 
-		if(badge)
+		if(badge || typeof(force) != 'undefined')
 			FB.ui(
 			  {
 			    method: 'feed',
-			    name: 'ทายคำ:'+ badge.subject,
+			    name: 'ได้ Badge :'+ badge.subject,
 			    link: 'http://www.taicome.com/',
 			    picture: prefix+badge.img,
-			    caption: 'เกมทายคำง่ายๆกับ taicome.com',
+			    caption: 'ของเกมทายคำง่ายๆกับ taicome.com',
 			    description: badge.content
 			  },
 			  function(response) {

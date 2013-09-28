@@ -163,6 +163,7 @@ function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 {
 	updateMenu('share');
 	$scope.question = {};
+	$scope.question.is_suggest = true;
 	if(!$rootScope.isSaveUser())
 		getUserFromFacebookAPI();
 	else
@@ -289,6 +290,7 @@ function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 					$rootScope.updateBadge('share', function(){
 						$('#shareModal').modal();
 					});	
+					
 				else
 					$('#shareModal').modal();
 				$scope.question ={};
