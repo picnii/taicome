@@ -180,7 +180,15 @@ function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 
 	$scope.convertFile = function()
 	{
+		console.log('change')
 		//code here convert
+		
+	}
+
+	$scope.doTest = function()
+	{
+		console.log($scope.test)
+		console.log('testtest')
 	}
 
 	$scope.changeAlphaPics =function(alpha)
@@ -210,7 +218,8 @@ function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 		{name:'action', description:'การกระทำ'},
 		{name:'place', description:'สถานที่'},
 		{name:'stuff', description:'สิ่งของ'},
-		{name:'url', description:'ใส่รูปเองจาก url ภาพ'}
+		{name:'url', description:'ใส่รูปเองจาก url ภาพ'},
+		{name:'file', description:'ใส่รูปเองจากเครื่อง(Chrome Only)'}
 	];
 	$scope.selecType = function(type)
 	{
@@ -222,11 +231,19 @@ function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 		{
 			$('#picture-toolbox').show();
 			$('#picture-helper').hide();
+			$('#picture-toolbox-file').hide();
+			
 			return 'url';
+		}else if(type == 'file'){
+			$('#picture-toolbox').hide();
+			$('#picture-helper').hide();
+			$('#picture-toolbox-file').show();
+			return 'file';
 		}else
 		{
 			$('#picture-toolbox').hide();
 			$('#picture-helper').show();
+			$('#picture-toolbox-file').hide();
 			$scope.testPictures = Picture.query({type:type}, function(data){
 				setTimeout(function(){
 					var container = document.querySelector('#picture-helper');

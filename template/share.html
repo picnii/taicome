@@ -47,19 +47,19 @@
 				<input type="text"  required ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ3" />
 			</div>
 		</div>
-		<div id="picture-toolbox-local" class="row" style="display:none;">
+		<div id="picture-toolbox-file" class="row" style="display:none;">
 			<div class="span4">
-				<input type="file" ng-model="question.file1" id="file1" ng-change="convertFile()" />
-				<input type="hidden"   ng-model="question.picture1" ng-change="adjustImages()" placeholder="url รูปภาพ1" />
+				  <input type="file"  file-read="question.picture1"   id="file1"  />
 			</div>
 			<div class="span4">
-				<input type="file"  ng-model="question.file2" id="file2"  ng-change="convertFile()" />
+				<input type="file" file-read="question.picture2" multiple   id="file2"   />
 				<input type="hidden"   ng-model="question.picture2" ng-change="adjustImages()" placeholder="url รูปภาพ2" />
 			</div>
 			<div class="span4">
-				<input type="file"  ng-model="question.file3" id="file3"  ng-change="convertFile()" />
+				<input type="file"  file-read="question.picture3"   id="file3"  />
 				<input type="hidden"   ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ3" />
 			</div>
+			
 		</div>
 
 		

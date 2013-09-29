@@ -335,3 +335,15 @@ function loadMaxLevel()
   	}
 	return localStorage.maxLevel;
 }
+
+  function imagetocanvas( img, thumbwidth, thumbheight ) {
+  	c  = document.createElement( 'canvas' ),
+    cx = c.getContext( '2d' ),
+    c.width = thumbwidth;
+    c.height = thumbheight;
+    
+    cx.drawImage( 
+      img, 0, 0, thumbwidth, thumbwidth 
+    );
+	return c.toDataURL();
+  };
