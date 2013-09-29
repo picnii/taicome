@@ -178,6 +178,11 @@ function ShareCtrl($scope, $rootScope, $location, Suggest , Picture)
 
 	$scope.picIndex = 0;
 
+	$scope.convertFile = function()
+	{
+		//code here convert
+	}
+
 	$scope.changeAlphaPics =function(alpha)
 	{
 		$('#pic-target-0').css('opacity', alpha);
