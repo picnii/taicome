@@ -16,3 +16,42 @@ else
   }
   console.log(localStorage.clickcount)
 </script>
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+<canvas id="myCanvas"></canvas>
+<script>
+	var c=document.getElementById("myCanvas");
+  	var ctx=c.getContext("2d");
+	var fileReadComplete = function(e){
+	   	var img = new Image();
+	    img.src = e.target.result;
+	    (function(){
+	        if (img.complete){
+	            ctx.drawImage(img);
+	            }
+	        else {
+	            setTimeout(arguments.callee, 50);
+	            }
+	        })();
+    };
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+   
+    
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+      	 var reader = new FileReader();
+	    reader.onload = fileReadComplete;
+	    reader.readAsDataURL(f);
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+  
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
