@@ -1,10 +1,11 @@
-<section class="container main">
+<section class="container main" id="{{section_id}}">
 	<aside class="control">
-		<a href="#/{{level-1}}" class="{{isShowBack()}} btn"><i class="icon-backward"></i></a>
+		<a href="#/share/create" class="{{isShowBack()}} share btn btn-inverse">ส่งมุขกลับ</a>
+		<button class="{{isShowBack()}} random  btn btn-inverse" ng-click="random()">สุ่มมุขใหม่</button>
 	</aside>
 	<header style="text-align:center;">
 
-		<h1 class="logo"><span class="brand">ทายคำ</span><span class="level">ด่านที่ {{question.level}}</span></h1>
+		<h1 class="logo"><span class="brand">ทายคำ</span>จาก <span class="share level"><a ng-href="{{question.owner_facebook_url}}" target="_blank">{{question.owner_name}}</a></span></h1>
 	</header>
 	<div class="imageContainer">
 		<div class="guess image">
@@ -27,6 +28,7 @@
 		</div>
 		<div class="social-answer" style="text-align:center;padding-top:10px">
 			<fbLike class="fb-like" data-href="{{url}}" data-width="80" data-layout="box_count" data-show-faces="true" data-send="false"></fbLike>
+			
 		</div>
 
 	</form>
@@ -37,7 +39,7 @@
 <div id="shareModal" class="modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Share</h3>
+    <h3>{{status}}</h3>
   </div>
   <div class="modal-body">
 		<a href="#" 
@@ -48,7 +50,8 @@
 		      'width=626,height=436'); 
 		    return false;"><img src="images/share-facebook.png" /></a>
 		 <a href="https://twitter.com/share" data-url="{{url}}" target="_blank"  data-text="{{answer}} {{url}}" data-hashtags="taicome"><img src="images/share-twitter.png" /></a>
-  		<label>ส่งผ่าน url(เพื่อนต้งเล่นถึงก่อนนะ)</label>
+
+  		<label>ส่งผ่าน url</label>
     	<input type="text" ng-model="url" />
 
 

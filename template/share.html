@@ -1,0 +1,126 @@
+<section class="container" id="suggest-section">
+	<form ng-submit="send()">
+	<div class="header" style="padding:5px;background-color:#ddd;border-radius:10px;">
+		<h2>ยืนยันตัวตนผู้ส่ง</h2>
+		<button ng-click="login()" class="{{isShowLogin()}} btn btn-primary">ดึงข้อมูลจาก Facebook</button>
+		<div class="user-id {{isShowLogin('inverse')}}">
+			<span>{{question.owner_name}}</span><img src="images/accept.gif"><br/>
+		</div>
+		<input id="owner-name" type="hidden"  required ng-model="question.owner_name" placeholder="ฉายา"/>
+
+		<input id="facebook-url" type="hidden" ng-model="question.owner_facebook_url" placeholder="url facebook ตัวเอง"/>
+		<input type="hidden" ng-model="question.owner_twitter_url" placeholder="url twitter ตัวเอง"/><br/>
+		<input type="checkbox" ng-model="question.is_suggest">แนะนำมุขนี้ให้เว็บ taicome.com<br/>
+				<br/>
+	</div>
+	
+	<header style="text-align:center;">
+		<h1 class="logo"><span class="brand">ทายคำ</span>จาก <span class="share level"><a ng-href="{{question.owner_facebook_url}}" target="_blank">{{question.owner_name}}</a></span></h1>
+	</header>
+	<div class="imageContainer">
+		<a href="#/share/create" ng-click="togglePicture()">
+			<div class="guess image" style="min-height:150px;min-width:400px;">
+				<img id="pic-target-0" ng-src="{{question.picture1}}" >
+				<img id="pic-target-1"  ng-src="{{question.picture2}}" >
+				<img id="pic-target-2"  ng-src="{{question.picture3}}" >
+			</div>
+		</a>
+	</div>
+	<section class="picture-helper">
+		<div >
+			<span class="logo" style="font-size:35px;">เลือกรูป</span>
+			
+		</div>
+		<ul class="nav nav-pills">
+		  <li ng-repeat="item in menu" id="{{item.name}}-menu" >
+		    <a href="#/share/create" ng-click="selecType(item.name)">{{item.description}}</a>
+		  </li>
+		</ul>
+		<div id="picture-toolbox" class="row" style="display:none;">
+			<div class="span4">
+				<input type="text"  required ng-model="question.picture1" ng-change="adjustImages()" placeholder="url รูปภาพ1" />
+			</div>
+			<div class="span4">
+				<input type="text"  required ng-model="question.picture2" ng-change="adjustImages()" placeholder="url รูปภาพ2" />
+			</div>
+			<div class="span4">
+				<input type="text"  required ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ3" />
+			</div>
+		</div>
+		<div id="picture-toolbox-file" class="row" style="display:none;">
+			<div class="span4">
+				  <input type="file"  file-read="question.picture1"   id="file1"  />
+			</div>
+			<div class="span4">
+				<input type="file" file-read="question.picture2" multiple   id="file2"   />
+				<input type="hidden"   ng-model="question.picture2" ng-change="adjustImages()" placeholder="url รูปภาพ2" />
+			</div>
+			<div class="span4">
+				<input type="file"  file-read="question.picture3"   id="file3"  />
+				<input type="hidden"   ng-model="question.picture3" ng-change="adjustImages()" placeholder="url รูปภาพ3" />
+			</div>
+			
+		</div>
+
+		
+		<div id="picture-helper">
+			<div class="item" ng-repeat="img in testPictures">
+				<a href="#/share/create" ng-click="selectPic(img.img)"><img  ng-src="{{img.img}}" style="max-height:170px;width:auto;"  /></a>
+			</div>
+		</div>
+	</section>
+	</div>
+	<div class="hint">
+		<input type="text" ng-model="question.hint" placeholder="คำใบ้"  required/>
+
+	</div>
+	<form ng-submit="checkAnswer()">
+		<div class="answer-bar input-append">
+			<input id="input-answer" type="text" ng-model="question.answer" ng-change="checkAnswerType()" placeholder="ข้อนี้ {{question.syllable}} พยางค์ ลองพิมพ์แล้วenterเลย">
+			<input type="number" ng-model="question.syllable" placeholder="พยางค์"  required />
+			
+		</div>
+		
+		<div class="answer-option">
+			
+			<!--<a href="#shareModal" role="button" class="btn btn-primary" data-toggle="modal">แชร์</a>-->
+			<input type="submit" class="btn btn-info" value="สร้างมุข"/>
+		</div>
+		<div class="social-answer" style="text-align:center;">
+
+			<fbLike class="fb-like" data-href="http://taicome.com" data-width="80" data-layout="box_count" data-show-faces="true" data-send="false"></fbLike>
+		</div>
+
+	
+		<div class="">
+			<!--<input type="submit" class="btn btn-info" value="สร้างมุข"/>-->
+		</div>
+		
+	</form>
+</section>
+
+<div id="shareModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Share</h3>
+  </div>
+  <div class="modal-body">
+		<a href="#" 
+		  onclick="
+		    window.open(
+		      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('{{url}}'), 
+		      'facebook-share-dialog', 
+		      'width=626,height=436'); 
+		    return false;"><img src="images/share-facebook.png" /></a>
+		 <a href="https://twitter.com/share" data-url="{{url}}" target="_blank"  data-text="{{answer}} {{url}}" data-hashtags="taicome"><img src="images/share-twitter.png" /></a>
+  		<label>ส่งผ่าน url</label>
+    	<input type="text" ng-model="url" />
+
+
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-danger" data-dismiss="modal" >ปิด</button>
+    
+  </div>
+
+</div>
