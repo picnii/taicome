@@ -25,6 +25,9 @@ angular.module('dataServices', ['ngResource']).
 }).factory('Picture', function($resource){
   return $resource('data/:type.json', {}, {
     query: {method:'GET'  , params:{type:'celeb'}, isArray:true}
-
+  });
+}).factory('Preview', function($resource){
+  return $resource('service/index.php/picture/preview', {}, {
+    upload: {method:'POST'}
   });
 })

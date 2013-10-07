@@ -1,5 +1,10 @@
 
 app.run(function($rootScope) {
+	$rootScope.site ={};
+	$rootScope.site.title = "ทายคำ";
+	$rootScope.site.logo = "http://taicome.com/images/logo.png";
+	$rootScope.facebook = {};
+	$rootScope.facebook.image = $rootScope.site.logo;
 	$rootScope.user = {};
 	$rootScope.actionCount = 0;
 	var badge_img_prefix_url = "images/";
@@ -43,6 +48,39 @@ app.run(function($rootScope) {
 				if(typeof(callback) != 'undefined')
 					callback();
 			}, delay * 1000);
+	}
+
+	$rootScope._lastAttemptCall = new Date();
+	$rootScope._lastAttemptValue = {};
+	$rootScope.attemptCoolDown = 1;
+	$rootScope.attemptList = [];
+	$rootScope.attemptChange = function(value)
+	{
+
+		var before = $rootScope._lastAttemptCall.getTime();
+		$rootScope._lastAttemptCall = new Date();
+		
+		var now = $rootScope._lastAttemptCall.getTime();
+		var diff_sec = (now - before) / 1000;
+		if(diff_sec >= $rootScope.attemptCoolDown)
+			$rootScope.addAttempt($rootScope._lastAttemptValue)
+		//after call
+		//console.log($rootScope._lastAttemptValue);
+		$rootScope._lastAttemptValue = value;
+		//check if next call in cooldown range?	
+	}
+
+	$rootScope.clearAttempt = function()
+	{
+		$rootScope.attemptList = [];
+	}
+
+	$rootScope.addAttempt = function(value)
+	{
+		var last = $rootScope.attemptList[$rootScope.attemptList.length - 1];
+		if(last != value && typeof(value) != 'object')
+			$rootScope.attemptList.push(value);
+		console.log($rootScope.attemptList)
 	}
 
 

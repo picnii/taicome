@@ -1,10 +1,11 @@
 <!doctype html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="taicome">
 <head>
-    <title>ทายคำ</title>
-    <meta property="og:image" content="http://taicome.com/images/logo.png"/>
+    <title>{{site.title}}</title>
+    <meta property="og:image" content="{{facebook.image}}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="lib/jquery.min.js"></script>
-
+    <script type="text/javascript" src="lib/html2canvas.js"></script>
    <link href="lib/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet"/>
    <link href="fonts/web_banga/stylesheet.css" type="text/css" rel="stylesheet"/>
     <!--[if lte IE 8]>

@@ -2,6 +2,7 @@ var app = angular.module('taicome', ['dataServices','angulartics', 'angulartics.
 		  config(['$routeProvider', function($routeProvider) {
 		  $routeProvider.
 		  	  when('/', {templateUrl: 'template/home.html',   controller: HomeCtrl}).
+		  	  when('/show', {templateUrl: 'template/show.html',   controller: ShowCtrl}).
 		  	  when('/random', {templateUrl: 'template/share-view.html',   controller: RandomCtrl}).
 		  	  when('/share/create', {templateUrl:'template/share.html', controller:ShareCtrl}).
 		  	  when('/share/:code', {templateUrl:'template/share-view.html', controller:ShareViewCtrl}).

@@ -1,0 +1,36 @@
+<section class="container main" id="{{section_id}}">
+
+	<header style="text-align:center;">
+		<h1 class="logo"><span class="brand">ทายคำ</span>จาก <span class="share level"><a ng-href="{{question.owner_facebook_url}}" target="_blank">{{question.owner_name}}</a></span></h1>
+		<button ng-click="testShare()">Share</button>
+	</header>
+	<section class="show-joke">
+		<div class="imageContainer">
+			<div class="guess image">
+				<img ng-repeat="picture_src in question.pictures" ng-src="{{picture_src}}" >
+			</div>
+		</div>
+		<div class="answer-bar" style="text-align:center;">
+			{{question.answer}}
+		</div>
+	</section>
+	<section class="render">
+
+	</section>
+</section>
+<style type="text/css">
+	.show-joke
+	{
+		background: black;
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	.show-joke .answer-bar
+	{
+		color:white;
+		font-size:40px;
+		padding-top: 24px;
+	}
+
+</style>
